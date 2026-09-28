@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\JeuxRepository;
+use App\Repository\GenreRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,5 +41,18 @@ class IndexController extends AbstractController
     {
         $jeux = $jeuxRepository->find($id);
         return $this->render('single-blog.html.twig', ['jeux' => $jeux]);
+    }
+
+    public function navgenre(GenreRepository $genreRepository): Response
+    {
+        $genres = $genreRepository->findAll();
+        return $this->render('app/genre.html.twig', ['genres' => $genres]);
+    }
+
+    #[Route('/categories/{slug}', name: 'app_genre')]
+    public function genre($slug, GenreRepository $genreRepository): Response
+    {
+        $genre = $genreRepository->findOneBy(['slug' => $slug]);
+        return $this->render('categories.html.twig', ['genre' => $genre]);
     }
 }

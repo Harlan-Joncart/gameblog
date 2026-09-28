@@ -24,6 +24,9 @@ class Genre
     #[ORM\OneToMany(targetEntity: Jeux::class, mappedBy: 'genre')]
     private Collection $jeux;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->jeux = new ArrayCollection();
@@ -72,6 +75,18 @@ class Genre
                 $jeux->setGenre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
