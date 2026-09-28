@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Present{% endblock %}
+
+{% block body %}
+    <h1>Create new Present</h1>
+
+    {{ include('present/_form.html.twig') }}
+
+    <a href="{{ path('app_present_index') }}">back to list</a>
+{% endblock %}
