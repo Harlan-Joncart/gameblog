@@ -20,4 +20,25 @@ class IndexController extends AbstractController
     {
         return $this->render('contact.html.twig');
     }
+    #[Route('/categories', name: 'app_categories')]
+    public function categories(): Response
+    {
+        return $this->render('categories.html.twig');
+    }
+    #[Route('/community', name: 'app_community')]
+    public function community(): Response
+    {
+        return $this->render('community.html.twig');
+    }
+    #[Route('/review', name: 'app_review')]
+    public function review(): Response
+    {
+        return $this->render('review.html.twig');
+    }
+    #[Route('/singleblog/{id}', name: 'app_game')]
+    public function singleblog($id, JeuxRepository $jeuxRepository): Response
+    {
+        $jeux = $jeuxRepository->find($id);
+        return $this->render('single-blog.html.twig', ['jeux' => $jeux]);
+    }
 }
